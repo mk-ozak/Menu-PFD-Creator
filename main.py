@@ -27,7 +27,7 @@ c.drawImage("assets/background.png", 0 * mm, 0 * mm, width=210 * mm, height=297 
 
 
 # Text content in an array
-txt_content = ["Krkovička pečená na pive"]
+txt_content = ["Krko pečená na pive"]
 
 def template():
     c.setFont("MyriadBlck", 77)
@@ -60,8 +60,7 @@ obsah_menu()
 
 # Save the PDF
 c.save()
-print("AHOJ")
-print("PDF created successfully: Luna_menu.pdf")
+print("AHOJ... PDF created successfully: Luna_menu.pdf")
 
 
 
