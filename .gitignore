@@ -1,2 +1,8 @@
 # ignoruj PDF
 menu.pdf
+*.ttf
+config.py
+
+
+__pycache__
+.vscode
