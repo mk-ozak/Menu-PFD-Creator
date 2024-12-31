@@ -31,16 +31,24 @@ def template():
     c.roundRect(22, y(317), 135, 22, 4, stroke=0, fill=1)
     c.roundRect(22, y(451), 215, 22, 4, stroke=0, fill=1)
     c.roundRect(22, y(769), 550, 4, 1, stroke=0, fill=1)
+    # cenove ciarky
     c.roundRect(501, y(353.7), 71, 2, 0.5, stroke=0, fill=1)
     c.roundRect(501, y(402), 71, 2, 0.5, stroke=0, fill=1)
-    c.roundRect(501, y(492), 71, 2, 0.5, stroke=0, fill=1)
-    c.roundRect(501, y(546.5), 71, 2, 0.5, stroke=0, fill=1)
-    c.roundRect(501, y(601.5), 71, 2, 0.5, stroke=0, fill=1)
-    c.roundRect(501, y(657), 71, 2, 0.5, stroke=0, fill=1)
+    for i in range(4): c.roundRect(501, y(492+(i*55)), 71, 2, 0.5, stroke=0, fill=1)
     c.roundRect(501, y(699), 71, 2, 0.5, stroke=0, fill=1)
     # logo a nadpisy
+
+    iky = 658
     c.drawImage("assets/logoLUNA.png", 167, y(94), width=232.9, height=73.9)
+    c.drawImage("assets/lakt.png", 433, y(iky), width=30, height=30)
+    c.drawImage("assets/lep.png", 466, y(iky), width=30, height=30)
     c.setFillColor(my_dblue)
+    c.setFont("MyriadCond", 8)
+    c.drawCentredString(448, y(iky+7), "bez laktózy", charSpace=-0.2)
+    c.drawCentredString(481, y(iky+7), "bez lepku", charSpace=-0.2)
+
+
+
     c.setFont("MyriadBlck", 77)
     c.drawString(50, y(172), "DENNÉ MENU", charSpace=1.7)
     c.setFillColor(my_white)
@@ -56,32 +64,29 @@ def template():
     c.drawString(129, y(279), "P2", charSpace=0)
     c.drawString(31.5, y(341), "1.", charSpace=0)
     c.drawString(31.5, y(390), "2.", charSpace=0)
-    c.drawString(31.5, y(477.5), "3.", charSpace=0)
-    c.drawString(31.5, y(532), "4.", charSpace=0)
-    c.drawString(31.5, y(586.5), "5.", charSpace=0)
-    c.drawString(31.5, y(641), "6.", charSpace=0)
-    c.drawString(31.5, y(695), "7.", charSpace=0)
+    for i in range(5): c.drawString(31.5, y(477+(i*55)), f"{i+3}.", charSpace=0)
+    # AL
     c.setFont("MyriadBolCon", 13)
     c.drawString(175, y(254), "AL:", charSpace=0)
     c.drawString(175, y(279), "AL:", charSpace=0)
     c.drawString(49.5, y(362), "AL:", charSpace=0)
     c.drawString(49.5, y(410), "AL:", charSpace=0)
-    c.drawString(49.5, y(498.5), "AL:", charSpace=0)
-    c.drawString(49.5, y(552.5), "AL:", charSpace=0)
-    c.drawString(49.5, y(607), "AL:", charSpace=0)
-    c.drawString(49.5, y(661.5), "AL:", charSpace=0)
-    c.drawString(76.5, y(695), "AL:", charSpace=0)
-    c.setFont("MyriadBolCon", 11)
-    c.drawString(152, y(254), "0,33 l", charSpace=-0.5)
-    c.drawString(152, y(279), "0,33 l", charSpace=-0.5)
+    for i in range(4): c.drawString(49.5, y(498+(i*55)), "AL:", charSpace=0)
+    c.drawString(79, y(697), "AL:", charSpace=0)
     
     # spodne texty
     c.setFillColor(my_dblue)
     c.setFont("MyriadBolCon", 16)
     c.drawRightString(567, y(312), "CENA MENU S POLIEVKOU:", charSpace=0.3)
     c.setFont("MyriadB", 17)
-    c.drawCentredString(298, y(756), "Palárikova ulica 89, otváracia doba 9:00-13:30", charSpace=-0.1)
-    c.drawCentredString(298, y(790), "Objednávky na rozvoz prijímame na tel.  0907 048 780 do 11:00", charSpace=-0.1)
+    c.drawString(67.5, y(790), "Objednávky na rozvoz prijímame na tel. 0907 048 780 do 1", charSpace=-0.1)
+    c.drawString(502, y(790), "1", charSpace=-0.1)
+    c.drawString(135, y(756), "Palárikova ulica 89, otváracia doba 9", charSpace=-0.1)
+    c.drawString(422, y(756), "-13", charSpace=-0.1)
+    c.setFont("MyriadB", 12)
+    c.drawString(408, y(750), "00", charSpace=0)
+    c.drawString(446, y(750), "00", charSpace=0)
+    c.drawString(511, y(785), "00", charSpace=0)
     c.setFillColor(my_black)
     c.setFont("MyriadB", 10)
     c.drawString(245, y(447), "(čas prípravy podľa vyťaženia kuchyne, obvykle do 5 min.)", charSpace=-0.2)
@@ -97,6 +102,10 @@ def obsah_menu(jedlo, p):
     c.setFillColor(my_white)
     c.setFont("MyriadB", 27)
     c.drawCentredString(298, y(215), jedlo[p][0].upper() + " " + jedlo[p][1], charSpace=-0.1)
+    # rezen
+    c.setFillColor(my_black)
+    c.setFont("MyriadB", 18) 
+    c.drawString(255, y(477), "(bravčový alebo kurací)", charSpace=-0.25)
     # polievky
     c.setFillColor(my_black)
     c.setFont("MyriadSB", 20) 
@@ -108,44 +117,32 @@ def obsah_menu(jedlo, p):
     c.drawString(110, y(390), pol(jedlo[p][14], 1), charSpace=-0.25)
     c.drawString(110, y(413), pol(jedlo[p][14], 2), charSpace=-0.25)
     # minutky
-    c.drawString(110, y(477.5), pol(jedlo[5][1], 1), charSpace=-0.25)
-    c.drawString(110, y(500.5), pol(jedlo[5][1], 2), charSpace=-0.25)
-    c.drawString(110, y(532), pol(jedlo[5][9], 1), charSpace=-0.25)
-    c.drawString(110, y(555), pol(jedlo[5][9], 2), charSpace=-0.25)
-    c.drawString(110, y(586.5), pol(jedlo[5][13], 1), charSpace=-0.25)
-    c.drawString(110, y(609.5), pol(jedlo[5][13], 2), charSpace=-0.25)
-    c.drawString(110, y(641), pol(jedlo[5][17], 1), charSpace=-0.25)
-    c.drawString(110, y(664), pol(jedlo[5][17], 2), charSpace=-0.25)
-    c.drawString(110, y(695), jedlo[5][21], charSpace=-0.25)
-    # gramaz
+    jedlo[5][5] = "Vyprážaný rezeň zemiakový šalát"
+    for i in range(5):
+        c.drawString(110, y(477+(i*55)), pol(jedlo[5][5+(i*4)], 1), charSpace=-0.25)
+        if i!=4: c.drawString(110, y(500+(i*55)), pol(jedlo[5][5+(i*4)], 2), charSpace=-0.25)
+    # gramaz hodnota
+    c.setFont("MyriadBolCon", 11)
+    c.drawString(152, y(254), "0,33 l", charSpace=-0.5)
+    c.drawString(152, y(279), "0,33 l", charSpace=-0.5)
     c.setFont("MyriadBolCon", 14)
     c.drawString(49.5, y(341), jedlo[p][12], charSpace=0)
     c.drawString(49.5, y(390), jedlo[p][16], charSpace=-0)
-    c.drawString(49.5, y(477.5), jedlo[5][3], charSpace=-0)
-    c.drawString(49.5, y(532), jedlo[5][11], charSpace=-0)
-    c.drawString(49.5, y(586.5), jedlo[5][15], charSpace=-0)
-    c.drawString(49.5, y(641), jedlo[5][19], charSpace=-0)
-    c.drawString(49.5, y(695), jedlo[5][23], charSpace=-0)
-    # alergeny
+    for i in range(5): c.drawString(49.5, y(477+(i*55)), jedlo[5][7+(i*4)], charSpace=-0) 
+    # alergeny hodnota
     c.setFont("MyriadBolCon", 12)
     c.drawString(192, y(254), jedlo[p][3], charSpace=-0.5)
     c.drawString(192, y(279), jedlo[p][7], charSpace=-0.5)
     c.drawString(66.5, y(362), jedlo[p][11], charSpace=-0.5)
     c.drawString(66.5, y(410), jedlo[p][15], charSpace=-0.5)
-    c.drawString(66.5, y(498.5), jedlo[5][2], charSpace=-0.5)
-    c.drawString(66.5, y(552.5), jedlo[5][10], charSpace=-0.5)
-    c.drawString(66.5, y(607), jedlo[5][14], charSpace=-0.5)
-    c.drawString(66.5, y(661.5), jedlo[5][18], charSpace=-0.5)
-    c.drawString(91.5, y(695), jedlo[5][22], charSpace=-0.5)
+    for i in range(4): c.drawString(66.5, y(498+(i*55)), jedlo[5][6+(i*4)], charSpace=-0.5)
+    c.drawString(94, y(697), jedlo[5][22], charSpace=-0.5)
     # ceny
     c.setFont("MyriadBlck", 18)
     c.drawRightString(567, y(344.5), jedlo[p][13], charSpace=0)
     c.drawRightString(567, y(393), jedlo[p][17], charSpace=0)
-    c.drawRightString(567, y(483.5), jedlo[5][4], charSpace=0)
-    c.drawRightString(567, y(537.5), jedlo[5][12], charSpace=0)
-    c.drawRightString(567, y(592.5), jedlo[5][16], charSpace=0)
-    c.drawRightString(567, y(648), jedlo[5][20], charSpace=0)
-    c.drawRightString(567, y(690.5), jedlo[5][24], charSpace=0)
+    for i in range(4): c.drawRightString(567, y(483+(i*55)), jedlo[5][8+(i*4)], charSpace=0)
+    c.drawRightString(567, y(690), jedlo[5][24], charSpace=0)
     
 def vykresli_strany():
     for i in range(5):
@@ -155,10 +152,6 @@ def vykresli_strany():
             c.showPage()
 
 vykresli_strany()
-#! obrazky bez lepku - ak nebude 1 v alergenoch tak obrazok?
-#! minúty časov ako horný index
-#! bravčový a kurací
-#! exe subor?
 
 # Save the PDF
 c.save()
