@@ -18,7 +18,8 @@ my_dblue = CMYKColor(0.40, 0.19, 0, 0.64)  # Dark Blue
 my_white = CMYKColor(0, 0, 0, 0)  # White
 
 # Create canvas
-c = canvas.Canvas("menu.pdf", pagesize=(595, 842), enforceColorSpace="CMYK")
+c = canvas.Canvas("Luna_menu.pdf", pagesize=(595, 842), enforceColorSpace="CMYK")
+#c = canvas.Canvas(r"C:\Users\mkoza\OneDrive` -` MIVIO` graphics`,` s.r.o\GRAFIKA\LUNA&ARTENZ\!MENU\Luna_menu.pdf", pagesize=(595, 842), enforceColorSpace="CMYK")
 
 # Draw the background image to cover the entire page
 #c.drawImage("assets/background.png", 0, 0, width=595, height=842)
@@ -39,15 +40,13 @@ def template():
     # logo a nadpisy
 
     iky = 658
-    c.drawImage("assets/logoLUNA.png", 167, y(94), width=232.9, height=73.9)
-    c.drawImage("assets/lakt.png", 433, y(iky), width=30, height=30)
-    c.drawImage("assets/lep.png", 466, y(iky), width=30, height=30)
+    c.drawImage("assets/logoLUNA.jpg", 167, y(94), width=232.9, height=73.9)
+    c.drawImage("assets/lakt.png", 440, y(iky), width=28, height=28)
+    c.drawImage("assets/lep.png", 471, y(iky), width=28, height=28)
     c.setFillColor(my_dblue)
     c.setFont("MyriadCond", 8)
-    c.drawCentredString(448, y(iky+7), "bez laktózy", charSpace=-0.2)
-    c.drawCentredString(481, y(iky+7), "bez lepku", charSpace=-0.2)
-
-
+    c.drawCentredString(455, y(iky+7), "bez laktózy", charSpace=-0.2)
+    c.drawCentredString(486, y(iky+7), "bez lepku", charSpace=-0.2)
 
     c.setFont("MyriadBlck", 77)
     c.drawString(50, y(172), "DENNÉ MENU", charSpace=1.7)
@@ -85,7 +84,7 @@ def template():
     c.drawString(422, y(756), "-13", charSpace=-0.1)
     c.setFont("MyriadB", 12)
     c.drawString(408, y(750), "00", charSpace=0)
-    c.drawString(446, y(750), "00", charSpace=0)
+    c.drawString(446, y(750), "30", charSpace=0)
     c.drawString(511, y(785), "00", charSpace=0)
     c.setFillColor(my_black)
     c.setFont("MyriadB", 10)
@@ -143,16 +142,31 @@ def obsah_menu(jedlo, p):
     c.drawRightString(567, y(393), jedlo[p][17], charSpace=0)
     for i in range(4): c.drawRightString(567, y(483+(i*55)), jedlo[5][8+(i*4)], charSpace=0)
     c.drawRightString(567, y(690), jedlo[5][24], charSpace=0)
-    
-def vykresli_strany():
-    for i in range(5):
-        template()
-        obsah_menu(menu, i)
-        if i != 4:
-            c.showPage()
+    # cena rozvoz
+    c.setFont("MyriadBolCon", 12)
+    # manuálne upravená cena pre rozvoz
+    if jedlo[p][13] == "6,70 €":
+        c.drawRightString(567, y(366), "na rozvoz: 7,70 €", charSpace=-0.5)
+    else:
+        c.drawRightString(567, y(366), "na rozvoz: 7,40 €", charSpace=-0.5)
 
-vykresli_strany()
+    c.drawRightString(567, y(414.5), "na rozvoz: 7,40 €", charSpace=-0.5)
+    c.drawRightString(567, y(505), "na rozvoz: 8,50 €", charSpace=-0.5)
+    c.drawRightString(567, y(560), "na rozvoz: 8,50 €", charSpace=-0.5)
+    c.drawRightString(567, y(615), "na rozvoz: 8,50 €", charSpace=-0.5)
+    c.drawRightString(567, y(670), "na rozvoz: 9,20 €", charSpace=-0.5)
+    c.drawRightString(567, y(711.5), "na rozvoz: 6,50 €", charSpace=-0.5)
+
+def main():
+    for i in range(5):
+        if menu[i][2] != "sviatok":
+            template()
+            obsah_menu(menu, i)
+            if i != 4:
+                c.showPage()
+
+main()
 
 # Save the PDF
 c.save()
-print("AHOJ... PDF created successfully: menu.pdf")
+print("AHOJ... PDF created successfully: Luna_menu.pdf")
